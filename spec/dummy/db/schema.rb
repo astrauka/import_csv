@@ -11,6 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140328154703) do
+
+  create_table "csv_imports", force: true do |t|
+    t.string   "file"
+    t.string   "file_cache"
+    t.integer  "total_count", default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "import_errors", force: true do |t|
+    t.integer  "csv_import_id"
+    t.string   "csv_import_type"
+    t.text     "error_messages"
+    t.text     "input_values"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "import_errors", ["csv_import_id", "csv_import_type"], name: "index_import_errors_on_csv_import_id_and_csv_import_type"
 
 end

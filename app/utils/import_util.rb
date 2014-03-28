@@ -1,5 +1,4 @@
 class ImportUtil
-
   # begin
   #   financial.currency = Currency.find_by!(code: attributes[:currency])
   # rescue ActiveRecord::RecordNotFound => e

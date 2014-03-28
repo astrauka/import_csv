@@ -1,7 +1,8 @@
 class CsvImport < ActiveRecord::Base
-  mount_uploader :file, CsvFileUploader
+  # configurable uploader
+  mount_uploader :file, ImportCsv.csv_file_uploader_class.constantize
 
-  has_many :importing_errors, as: :importing
+  has_many :import_errors, as: :csv_import
 
   validates :file, presence: true
 
@@ -17,16 +18,24 @@ class CsvImport < ActiveRecord::Base
     end
   end
 
-  def self.run_importing_job(importing)
-    raise "Please override me with call to importing job"
+  def self.run_csv_import_job(csv_import)
+    raise "Please override me with call to csv import job"
   end
 
   def schedule_import
-    if CsvImport.delay_importing
-      Admins::ImportsWorker.perform_async(id)
+    if ImportCsv.delay_csv_import
+      import_async
     else
-      Admins::ImportsWorker.new.perform(id)
+      import_sync
     end
+  end
+
+  def import_async
+    raise "Please define asynchronous importing"
+  end
+
+  def import_sync
+    raise "Please define synchronous importing"
   end
 
   def saved_count
@@ -34,6 +43,6 @@ class CsvImport < ActiveRecord::Base
   end
 
   def failed_count
-    importing_errors.count
+    import_errors.count
   end
 end

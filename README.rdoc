@@ -6,6 +6,10 @@ Provides mechanism to import csv.
 Records imports to database to display them to user.
 Supports async importing.
 
+== TODO
+
+Currently supports only ActiveRecord
+
 == Development
 
 * Clone the repository

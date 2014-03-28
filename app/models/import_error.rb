@@ -1,5 +1,5 @@
 class ImportError < ActiveRecord::Base
-  belongs_to :importing, polymorphic: true
+  belongs_to :csv_import, polymorphic: true
 
   serialize :error_messages, Hash
   serialize :input_values, Hash

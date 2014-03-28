@@ -17,10 +17,14 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
 
+  s.add_dependency "state_machine" # for csv import states
+  s.add_dependency "carrierwave" # csv file uploader
+
   s.add_development_dependency "rails", "~> 4.0.4"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "database_cleaner"
   s.add_development_dependency "capybara"
   s.add_development_dependency "poltergeist"
+  s.add_development_dependency "factory_girl"
 end

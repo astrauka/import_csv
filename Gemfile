@@ -7,3 +7,7 @@ gemspec
 
 gem 'spring'
 gem 'spring-commands-rspec'
+
+group :test do
+  gem "pry-rails"
+end
