@@ -1,3 +1,32 @@
 = ImportCsv
 
 This project rocks and uses MIT-LICENSE.
+
+Provides mechanism to import csv.
+Records imports to database to display them to user.
+Supports async importing.
+
+== Development
+
+* Clone the repository
+
+* Migrate database
+
+```
+RAILS_ENV=test bundle exec rake -f spec/dummy/Rakefile db:create db:migrate
+```
+
+* Run specs
+
+```
+rspec
+```
+
+* Launch dummy application
+
+```
+cd spec/dummy
+spring rails s
+```
+
+Visit http://localhost:3000
