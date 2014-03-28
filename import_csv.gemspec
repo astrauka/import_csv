@@ -1,12 +1,12 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "csv_import/version"
+require "import_csv/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "csv_import"
-  s.version     = CsvImport::VERSION
+  s.name        = "import_csv"
+  s.version     = ImportCsv::VERSION
   s.authors     = ["Bit Zesty"]
   s.email       = ["info@bitzesty.com"]
   s.homepage    = "http://bitzesty.com/"

@@ -1,3 +1,3 @@
-module CsvImport
+module ImportCsv
   VERSION = "0.0.1"
 end

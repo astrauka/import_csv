@@ -1,4 +1,4 @@
 # desc "Explaining what the task does"
-# task :csv_import do
+# task :import_csv do
 #   # Task goes here
 # end

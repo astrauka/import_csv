@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    csv_import (0.0.1)
+    import_csv (0.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -119,8 +119,8 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
-  csv_import!
   database_cleaner
+  import_csv!
   poltergeist
   rails (~> 4.0.4)
   rspec-rails
