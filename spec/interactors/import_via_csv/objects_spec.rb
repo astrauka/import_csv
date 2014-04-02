@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe ImportViaCsv::Objects do
-  let(:importer) { described_class.new(csv_import) }
+  let(:importer) { described_class.new(csv_import, build_strategy) }
   let(:csv_import) do
     i = create :csv_import
     i.stub(:file) { double :file,
@@ -27,11 +27,8 @@ Aroma,"Teodor Therapy"
   let(:built_object) { OpenStruct.new errors: { key: :value },
                                       valid?: true,
                                       save: false }
-  before do
-    ImportViaCsv::Row.any_instance.stub(:build_object_from_attributes) {
-      built_object
-    }
-  end
+  let(:build_strategy) { double :build_strategy,
+                                build: built_object }
 
   describe "#run" do
     context "When importing ends up in exception" do

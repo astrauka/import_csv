@@ -1,16 +1,14 @@
 require "spec_helper"
 
 describe ImportViaCsv::Row do
-  let(:importer) { described_class.new(row) }
+  let(:importer) { described_class.new(row, build_strategy) }
   let(:row) do
     { name: "name" }
   end
   let(:built_object) { OpenStruct.new(errors: errors) }
   let(:errors) { [] }
-
-  before do
-    importer.stub(:build_object_from_attributes) { built_object }
-  end
+  let(:build_strategy) { double :build_strategy,
+                                build: built_object }
 
   describe "#run" do
     let(:failure) { importer.run.failure }
