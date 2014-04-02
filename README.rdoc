@@ -8,6 +8,13 @@ Supports async importing.
 
 == Usage
 
+To import objects via CSV:
+
+* Setup import csv initializer as per:
+
+* Define a strategy to build the imported object from csv attributes as per:
+
+* Launch the import as per:
 
 == TODO
 
@@ -22,7 +29,8 @@ Currently depends on Sidekiq for async execution
 * Migrate database
 
 ```
-RAILS_ENV=test bundle exec rake -f spec/dummy/Rakefile db:create db:migrate
+bundle exec rake -f spec/dummy/Rakefile db:create db:migrate
+RAILS_ENV=test bundle exec rake -f spec/dummy/Rakefile db:migrate
 ```
 
 * Run specs
