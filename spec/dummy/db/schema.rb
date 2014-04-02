@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140328154703) do
+ActiveRecord::Schema.define(version: 20140402125740) do
+
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.integer  "status_id"
+    t.integer  "location_id"
+    t.string   "contact_email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "companies", ["location_id"], name: "index_companies_on_location_id"
+  add_index "companies", ["status_id"], name: "index_companies_on_status_id"
 
   create_table "csv_imports", force: true do |t|
     t.string   "file"
@@ -34,5 +46,17 @@ ActiveRecord::Schema.define(version: 20140328154703) do
   end
 
   add_index "import_errors", ["csv_import_id", "csv_import_type"], name: "index_import_errors_on_csv_import_id_and_csv_import_type"
+
+  create_table "locations", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "statuses", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

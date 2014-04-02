@@ -25,11 +25,12 @@ module BuildForCsvImport
     end
 
     def company
-      @company ||= Company.find_or_initialize_by(name: attributes[:name])
+      @company ||= ::Company.find_or_initialize_by(name: attributes[:name])
     end
 
     def run
       begin
+        # transaction will "cancel" all the records that were created during company build
         company.transaction do
           assign_status
           assign_location

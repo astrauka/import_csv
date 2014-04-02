@@ -21,6 +21,10 @@ Dir[File.join(ENGINE_RAILS_ROOT, "spec/support/**/*.rb")].each {|f| require f }
 # require factories
 Dir[File.join(ENGINE_RAILS_ROOT, "spec/factories/**/*.rb")].each {|f| require f }
 
+# require dummy application code
+Dir[File.join(ENGINE_RAILS_ROOT, "spec/dummy/app/**/*.rb")].each {|f| require f }
+
+
 RSpec.configure do |config|
   # config.use_transactional_fixtures = false
   config.infer_base_class_for_anonymous_controllers = false
