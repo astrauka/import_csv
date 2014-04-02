@@ -1,9 +1,10 @@
 module ImportViaCsv
   class Row
-    attr_reader :row, :failure
+    attr_reader :row, :build_strategy, :failure
 
-    def initialize(row)
+    def initialize(row, build_strategy = nil)
       @row = row
+      @build_strategy = build_strategy
     end
 
     def run
@@ -14,7 +15,11 @@ module ImportViaCsv
     end
 
     def build_object_from_attributes
-      raise "Please define object builder from attributes, object attributes are stored in object_attributes"
+      if build_strategy && build_strategy.respond_to?("build")
+        build_strategy.build object_attributes.with_indifferent_access
+      else
+        raise "Please define strategy for building object from attributes"
+      end
     end
 
     def object_attributes

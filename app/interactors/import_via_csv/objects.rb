@@ -2,10 +2,11 @@ require 'csv'
 
 module ImportViaCsv
   class Objects
-    attr_reader :csv_import, :exception, :total_records, :failed_records
+    attr_reader :csv_import, :build_strategy, :exception, :total_records, :failed_records
 
-    def initialize(csv_import)
+    def initialize(csv_import, build_strategy = nil)
       @csv_import = csv_import
+      @build_strategy = build_strategy
 
       # count of records in csv file
       @total_records = 0
@@ -44,7 +45,7 @@ module ImportViaCsv
                   headers: true,
                   skip_blanks: true,
                   header_converters: [:symbol]) do |row|
-          row_import = ImportViaCsv::Row.new(row).run
+          row_import = ImportViaCsv::Row.new(row, build_strategy).run
           @failed_records << row_import.failure if row_import.failure
           @total_records += 1
         end
