@@ -6,9 +6,14 @@ Provides mechanism to import csv.
 Records imports to database to display them to user.
 Supports async importing.
 
+== Usage
+
+
 == TODO
 
 Currently supports only ActiveRecord
+Currently supports carrierwave uploaders
+Currently depends on Sidekiq for async execution
 
 == Development
 

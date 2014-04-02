@@ -16,10 +16,13 @@ ActiveRecord::Schema.define(version: 20140328154703) do
   create_table "csv_imports", force: true do |t|
     t.string   "file"
     t.string   "file_cache"
+    t.string   "type"
     t.integer  "total_count", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "csv_imports", ["type"], name: "index_csv_imports_on_type"
 
   create_table "import_errors", force: true do |t|
     t.integer  "csv_import_id"

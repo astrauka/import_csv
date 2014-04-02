@@ -31,11 +31,11 @@ class CsvImport < ActiveRecord::Base
   end
 
   def import_async
-    raise "Please define asynchronous importing"
+    CsvImportWorker.perform_async(id)
   end
 
   def import_sync
-    raise "Please define synchronous importing"
+    CsvImportWorker.new.perform(id)
   end
 
   def saved_count
