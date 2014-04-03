@@ -13,7 +13,6 @@ This project rocks and uses MIT-LICENSE.
 === To import objects via CSV:
 
 * Setup import csv initializer as per:
-
   https://github.com/astrauka/import_csv/blob/master/spec/dummy/app/models/csv_imports/company.rb
 
 * Define a strategy to build the imported object from csv attributes as per:
@@ -30,27 +29,22 @@ This project rocks and uses MIT-LICENSE.
 
 === Check out the application on local to see how it looks
 
-`
-git clone git@github.com:astrauka/import_csv.git
-cd import_csv/spec/dummy
-spring rails s
-`
+    git clone git@github.com:astrauka/import_csv.git
+    cd import_csv/spec/dummy
+    spring rails s
 
 Launch http://localhost:3000
 
 === To reuse base controllers and views
 
-`
-git clone git@github.com:astrauka/import_csv.git
-cd import_csv
+    git clone git@github.com:astrauka/import_csv.git
+    cd import_csv
 
-cp spec/dummy/app/assets/javascripts/common/csv_imports_table.js.coffee <my_app>/app/assets/javascripts/
-cp spec/dummy/app/helpers/csv_imports_helper.rb <my_app>/app/helpers/
-cp -r spec/dummy/app/controllers/csv_imports <my_app>/app/controllers/
-cp -r spec/dummy/app/views/csv_imports <my_app>/app/views/
-cp -r spec/dummy/app/decorators <my_app>/app/
-
-`
+    cp spec/dummy/app/assets/javascripts/common/csv_imports_table.js.coffee <my_app>/app/assets/javascripts/
+    cp spec/dummy/app/helpers/csv_imports_helper.rb <my_app>/app/helpers/
+    cp -r spec/dummy/app/controllers/csv_imports <my_app>/app/controllers/
+    cp -r spec/dummy/app/views/csv_imports <my_app>/app/views/
+    cp -r spec/dummy/app/decorators <my_app>/app/
 
 Ensure that you have localization helper defined:
 
@@ -77,15 +71,11 @@ RAILS_ENV=test bundle exec rake -f spec/dummy/Rakefile db:migrate
 
 * Run specs
 
-`
-rspec
-`
+    rspec
 
 * Launch dummy application
 
-`
-cd spec/dummy
-spring rails s
-`
+    cd spec/dummy
+    spring rails s
 
 Visit http://localhost:3000
