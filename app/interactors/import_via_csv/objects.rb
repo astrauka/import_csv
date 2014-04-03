@@ -16,7 +16,6 @@ module ImportViaCsv
     end
 
     def run
-      sleep 2
       begin
         import_objects
         save_importing_results

@@ -9,6 +9,8 @@ require "rspec/rails"
 require "active_record"
 require "database_cleaner"
 require "factory_girl"
+require "draper"
+require "decent_exposure"
 
 Rails.backtrace_cleaner.remove_silencers!
 
