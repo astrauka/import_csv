@@ -3,9 +3,7 @@
 This project rocks and uses MIT-LICENSE.
 
 * Provides mechanism to import csv.
-
 * Records imports to database to display them to user.
-
 * Supports async importing.
 
 == Usage
@@ -16,24 +14,22 @@ This project rocks and uses MIT-LICENSE.
   https://github.com/astrauka/import_csv/blob/master/spec/dummy/app/models/csv_imports/company.rb
 
 * Define a strategy to build the imported object from csv attributes as per:
-
   https://github.com/astrauka/import_csv/blob/master/spec/dummy/app/strategies/build_for_csv_import/company.rb
 
 * Launch the import as per:
-
   https://github.com/astrauka/import_csv/blob/master/spec/dummy/app/controllers/csv_imports/companies_controller.rb
 
   or launch manually as per:
-
   https://github.com/astrauka/import_csv/blob/master/spec/dummy/app/interactors/import_via_csv/companies.rb
 
 === Check out the application on local to see how it looks
 
     git clone git@github.com:astrauka/import_csv.git
     cd import_csv/spec/dummy
+    bundle
     spring rails s
 
-Launch http://localhost:3000
+Launch at http://localhost:3000
 
 === To reuse base controllers and views
 
@@ -47,27 +43,21 @@ Launch http://localhost:3000
     cp -r spec/dummy/app/decorators <my_app>/app/
 
 Ensure that you have localization helper defined:
-
 https://github.com/astrauka/import_csv/blob/master/spec/dummy/app/helpers/application_helper.rb#L30
 
 == TODO
 
 * Currently supports only ActiveRecord
-
 * Currently supports carrierwave uploaders
-
 * Currently depends on Sidekiq for async execution
 
 == Development
 
 * Clone the repository
-
 * Migrate database
 
-`
-bundle exec rake -f spec/dummy/Rakefile db:create db:migrate
-RAILS_ENV=test bundle exec rake -f spec/dummy/Rakefile db:migrate
-`
+    bundle exec rake -f spec/dummy/Rakefile db:create db:migrate
+    RAILS_ENV=test bundle exec rake -f spec/dummy/Rakefile db:migrate
 
 * Run specs
 
