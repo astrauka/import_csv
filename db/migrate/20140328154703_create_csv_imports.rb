@@ -4,6 +4,7 @@ class CreateCsvImports < ActiveRecord::Migration
       t.string :file
       t.string :file_cache
       t.string :type
+      t.string :state
       t.integer :total_count, default: 0
 
       t.timestamps

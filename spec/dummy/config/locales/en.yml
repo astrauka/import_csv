@@ -1,1 +1,10 @@
 en:
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      date_short: "%d/%m/%Y"
+      date_long: "%d %b %Y"
+
+  date:
+    formats:
+      default: "%d/%m/%Y"

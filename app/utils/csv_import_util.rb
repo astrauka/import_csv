@@ -9,14 +9,14 @@ class CsvImportUtil
     begin
       object.public_send "#{attribute}=", relation_klass.find_by!(relation_finder_attributes)
     rescue ActiveRecord::RecordNotFound => e
-      object.errors.add(:base, "#{relation_klass} was not found - #{formatted_attributes relation_finder_attributes}")
+      object.errors.add(:base, "#{relation_klass} was not found by #{formatted_attributes relation_finder_attributes}")
       raise e
     end
   end
 
   def self.formatted_attributes(attributes)
     attributes.map do |key, value|
-      "#{key}: #{value}"
-    end.join("; ")
+      "#{key}(#{value})"
+    end.join(", ")
   end
 end

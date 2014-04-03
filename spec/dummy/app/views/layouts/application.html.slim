@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    title
+      - if content_for?(:app_title)
+        = yield(:app_title)
+      - else
+        | Example application
+
+    = stylesheet_link_tag "application", media: "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = render 'javascript'
+
+    = yield(:head) if content_for?(:head)
+
+  body[
+    data-controller=controller_name
+    data-action=action_name
+    data-router-class=data_controller_name
+    data-router-action="#{action_name.to_s}_action"
+  ]
+    #wrapper
+      #wrapper-margin
+        = render "layouts/header"
+        .container
+          = render "layouts/alerts"
+          = yield
+
+    = render "layouts/footer"

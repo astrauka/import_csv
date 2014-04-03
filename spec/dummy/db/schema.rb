@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20140402125740) do
     t.string   "file"
     t.string   "file_cache"
     t.string   "type"
+    t.string   "state"
     t.integer  "total_count", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -38,14 +39,11 @@ ActiveRecord::Schema.define(version: 20140402125740) do
 
   create_table "import_errors", force: true do |t|
     t.integer  "csv_import_id"
-    t.string   "csv_import_type"
     t.text     "error_messages"
     t.text     "input_values"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "import_errors", ["csv_import_id", "csv_import_type"], name: "index_import_errors_on_csv_import_id_and_csv_import_type"
 
   create_table "locations", force: true do |t|
     t.string   "name"

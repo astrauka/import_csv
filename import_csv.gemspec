@@ -22,9 +22,27 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "rails", "~> 4.0.4"
   s.add_development_dependency "sqlite3"
+
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "database_cleaner"
   s.add_development_dependency "capybara"
   s.add_development_dependency "poltergeist"
   s.add_development_dependency "factory_girl"
+
+  s.add_development_dependency "draper"
+  s.add_development_dependency "decent_exposure"
+
+  s.add_development_dependency "slim-rails", "~> 2.0"
+  s.add_development_dependency "simple_form", "~> 3.0"
+  s.add_development_dependency "sass-rails", "~> 4.0.2"
+  s.add_development_dependency "coffee-rails", "~> 4.0"
+  s.add_development_dependency "uglifier", ">= 1.3"
+  s.add_development_dependency "execjs"
+  s.add_development_dependency "kaminari"
+
+  s.add_development_dependency "bootstrap-sass", ">= 3.0"
+  s.add_development_dependency "jquery-rails"
+  s.add_development_dependency "jquery-ui-rails"
+
+  s.add_development_dependency "pry-rails"
 end

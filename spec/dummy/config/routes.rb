@@ -1,9 +1,16 @@
 Dummy::Application.routes.draw do
-  resource :home, only: [] do
-    member {
-      get :basic_layout
-    }
+  namespace :csv_imports, module: "csv_imports", path: "csv_imports" do
+    resources :companies, only: [] do
+      collection {
+        get :import_form
+        post :import
+      }
+    end
+
+    resources :objects, only: [:index, :show] do
+      resources :import_errors, only: [:index]
+    end
   end
 
-  root to: "homes#basic_layout"
+  root to: "csv_imports/objects#index"
 end

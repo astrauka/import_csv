@@ -2,7 +2,7 @@ require 'csv'
 
 module ImportViaCsv
   class Objects
-    attr_reader :csv_import, :build_strategy, :exception, :total_records, :failed_records
+    attr_reader :csv_import, :exception, :total_records, :failed_records
 
     def initialize(csv_import, build_strategy = nil)
       @csv_import = csv_import
@@ -51,6 +51,17 @@ module ImportViaCsv
         end
       rescue CSV::MalformedCSVError => e
         @exception = e
+      end
+    end
+
+    def build_strategy
+      # defined in arguments or defined by csv_import
+      @build_strategy ||= csv_import_build_strategy
+    end
+
+    def csv_import_build_strategy
+      if csv_import.respond_to?("build_strategy")
+        csv_import.build_strategy
       end
     end
 

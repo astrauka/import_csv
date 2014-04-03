@@ -2,7 +2,7 @@ class CsvImport < ActiveRecord::Base
   # configurable uploader
   mount_uploader :file, ImportCsv.csv_file_uploader_class.constantize
 
-  has_many :import_errors, as: :csv_import
+  has_many :import_errors
 
   validates :file, presence: true
 
@@ -19,7 +19,11 @@ class CsvImport < ActiveRecord::Base
   end
 
   def self.run_csv_import_job(csv_import)
-    raise "Please override me with call to csv import job"
+    if csv_import.respond_to? "build_strategy"
+      ImportViaCsv::Objects.new(csv_import).run
+    else
+      raise "Please override me with call to csv import job or define build_strategy method to import"
+    end
   end
 
   def schedule_import
