@@ -5,6 +5,13 @@ require "rails/all"
 Bundler.require(*Rails.groups)
 require "import_csv"
 
+# for specs
+require "sass-rails"
+require "jquery-rails"
+require "bootstrap-sass"
+require "kaminari"
+require "draper"
+
 module Dummy
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

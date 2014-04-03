@@ -1,3 +1,8 @@
+# example usage:
+#   window.app ||= {}
+#   require csv_imports_table in application.js.coffee
+#   (new app.CsvImportsTable).start_reloading()
+
 class app.CsvImportsTable
   constructor: (table_finder = "table.csv-imports", refresh_interval = 5000) ->
     @table_finder = table_finder
