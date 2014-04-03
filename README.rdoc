@@ -11,20 +11,20 @@ This project rocks and uses MIT-LICENSE.
 === To import objects via CSV:
 
 * Setup import csv initializer as per:
-  https://github.com/astrauka/import_csv/blob/master/spec/dummy/app/models/csv_imports/company.rb
+  https://github.com/bitzesty/import_csv/blob/master/spec/dummy/app/models/csv_imports/company.rb
 
 * Define a strategy to build the imported object from csv attributes as per:
-  https://github.com/astrauka/import_csv/blob/master/spec/dummy/app/strategies/build_for_csv_import/company.rb
+  https://github.com/bitzesty/import_csv/blob/master/spec/dummy/app/strategies/build_for_csv_import/company.rb
 
 * Launch the import as per:
-  https://github.com/astrauka/import_csv/blob/master/spec/dummy/app/controllers/csv_imports/companies_controller.rb
+  https://github.com/bitzesty/import_csv/blob/master/spec/dummy/app/controllers/csv_imports/companies_controller.rb
 
   or launch manually as per:
-  https://github.com/astrauka/import_csv/blob/master/spec/dummy/app/interactors/import_via_csv/companies.rb
+  https://github.com/bitzesty/import_csv/blob/master/spec/dummy/app/interactors/import_via_csv/companies.rb
 
 === Check out the application on local to see how it looks
 
-    git clone git@github.com:astrauka/import_csv.git
+    git clone git@github.com:bitzesty/import_csv.git
     cd import_csv/spec/dummy
     bundle
     spring rails s
@@ -33,7 +33,7 @@ Launch at http://localhost:3000
 
 === To reuse base controllers and views
 
-    git clone git@github.com:astrauka/import_csv.git
+    git clone git@github.com:bitzesty/import_csv.git
     cd import_csv
 
     cp spec/dummy/app/assets/javascripts/common/csv_imports_table.js.coffee <my_app>/app/assets/javascripts/
@@ -43,7 +43,7 @@ Launch at http://localhost:3000
     cp -r spec/dummy/app/decorators <my_app>/app/
 
 Ensure that you have localization helper defined:
-https://github.com/astrauka/import_csv/blob/master/spec/dummy/app/helpers/application_helper.rb#L30
+https://github.com/bitzesty/import_csv/blob/master/spec/dummy/app/helpers/application_helper.rb#L30
 
 == TODO
 
