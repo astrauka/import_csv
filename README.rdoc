@@ -6,9 +6,12 @@
 
 == Usage
 
-=== Include to your Gemfile
+=== Include to your Gemfile and migrate database to add imports and import_errors tables
 
     gem "import_csv", git: "git@github.com:bitzesty/import_csv"
+
+    bundle
+    rake db:migrate
 
 === To import objects via CSV:
 
