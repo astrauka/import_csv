@@ -9,7 +9,6 @@ require "rspec/rails"
 require "active_record"
 require "database_cleaner"
 require "factory_girl"
-require "decent_exposure"
 require "slim"
 require "simple_form"
 

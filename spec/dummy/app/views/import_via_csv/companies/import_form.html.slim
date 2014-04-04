@@ -5,12 +5,12 @@
         ' Import Companies
         small.pull-right
           = link_to "Import Log",
-                    csv_imports_objects_path(type: csv_import_type),
+                    import_via_csv_objects_path(type: csv_import_type),
                     class: "btn-link"
 
       .form-margin.well
         = simple_form_for csv_import,
-                          url: import_csv_imports_companies_path,
+                          url: import_import_via_csv_companies_path,
                           method: :post,
                           as: :csv_import,
                           html: { multipart: true, class: 'form-horizontal form-container' } do |f|

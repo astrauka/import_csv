@@ -3,6 +3,8 @@ PATH
   specs:
     import_csv (0.0.1)
       carrierwave
+      decent_exposure
+      draper
       state_machine
 
 GEM
@@ -201,8 +203,6 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.0)
   database_cleaner
-  decent_exposure
-  draper
   execjs
   factory_girl
   import_csv!

@@ -1,4 +1,4 @@
-module CsvImports
+module ImportViaCsv
   class BaseController < ApplicationController
     expose(:csv_import) { CsvImport.find(params[:object_id]) }
     expose(:csv_imports_type) {

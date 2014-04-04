@@ -1,0 +1,36 @@
+Description:
+    Generates initializer, controllers, views, helpers, decorators, javascripts and example strategy for csv imports which you can later customize.
+    First argument defines model that you want to import.
+    The views and controllers are already namespaced under CsvImports / csv_imports.
+    You can prefix them with namespace such as admin then the resulting namespace would be admin/csv_imports.
+    The same prefix admin will be used to namespace helpers.
+    To generated no namespace do not specify argument or provide it as "none".
+    Javascript file for async indexing is not namespaced by default, you can define the namespace for that.
+    Helpers and decorators will not be namespaced.
+    The generator also generates an example - companies import to get you started on how to use the engine.
+    Generating second model import please use --skip-skeleton option
+
+Example:
+    rails generate import_csv model_to_import controller_namespace javascript_namespace
+    rails generate import_csv Scheme admins common
+    rails generate import_csv Scheme admins --skip-skeleton
+
+    This will create:
+        config/initializers/import_csv.rb
+        app/strategies/build_for_csv_import/scheme.rb
+        app/assets/javascripts/common/csv_imports_table.js.coffee
+        app/helpers/admins/csv_imports_helper.rb
+
+        app/controllers/admins/csv_imports/base_controller.rb
+        app/controllers/admins/csv_imports/import_errors_controller.rb
+        app/controllers/admins/csv_imports/objects_controller.rb
+        app/controllers/admins/csv_imports/schemes_controller.rb
+
+        app/views/admins/csv_imports/schemes/import_form.html.slim
+        app/views/admins/csv_imports/import_errors/index.html.slim
+        app/views/admins/csv_imports/objects/_csv_import_results.html.slim
+        app/views/admins/csv_imports/objects/index.html.slim
+
+        app/decorators/application_decorator.rb
+        app/decorators/csv_import_decorator.rb
+        app/decorators/import_error_decorator.rb

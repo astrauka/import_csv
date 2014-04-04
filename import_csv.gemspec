@@ -19,6 +19,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency "state_machine" # for csv import states
   s.add_dependency "carrierwave" # csv file uploader
+  s.add_dependency "draper"
+  s.add_dependency "decent_exposure"
 
   s.add_development_dependency "rails", "~> 4.0.4"
   s.add_development_dependency "sqlite3"
@@ -30,8 +32,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "poltergeist"
   s.add_development_dependency "factory_girl"
 
-  s.add_development_dependency "draper"
-  s.add_development_dependency "decent_exposure"
 
   s.add_development_dependency "slim-rails", "~> 2.0"
   s.add_development_dependency "simple_form", "~> 3.0"

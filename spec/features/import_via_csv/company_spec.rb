@@ -3,7 +3,7 @@ require "spec_helper"
 describe "Importing companies via csv" do
   context "When import fails" do
     it "Then displays failed result" do
-      visit import_form_csv_imports_companies_path
+      visit import_form_import_via_csv_companies_path
       upload_csv_file
 
       expect_to_see "scheduled"

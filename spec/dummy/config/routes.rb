@@ -1,10 +1,14 @@
 Dummy::Application.routes.draw do
-  namespace :csv_imports, module: "csv_imports", path: "csv_imports" do
+  concern :importable do
+    collection {
+      get :import_form
+      post :import
+    }
+  end
+
+  namespace :import_via_csv, module: "import_via_csv", path: "import_via_csv" do
     resources :companies, only: [] do
-      collection {
-        get :import_form
-        post :import
-      }
+      concerns :importable
     end
 
     resources :objects, only: [:index, :show] do
@@ -12,5 +16,5 @@ Dummy::Application.routes.draw do
     end
   end
 
-  root to: "csv_imports/objects#index"
+  root to: "import_via_csv/objects#index"
 end

@@ -1,0 +1,13 @@
+Description:
+    Generates controllers, views, helpers, decorators and javascripts for csv imports which you can later customize.
+    The views and controllers are already namespaced under CsvImports / csv_imports.
+    You can prefix them with namespace such as admin then the resulting namespace would be admin/csv_imports.
+    Javascript file for async indexing is not namespaced by default, you can define the namespace for that.
+    Helpers and decorators will not be namespaced.
+    The generator also generates an example - companies import to get you started on how to use the engine.
+
+Example:
+    rails generate import_csv admin common
+
+    This will create:
+        what/will/it/create

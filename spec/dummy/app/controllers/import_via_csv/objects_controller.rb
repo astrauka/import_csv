@@ -1,5 +1,5 @@
-module CsvImports
-  class ObjectsController < CsvImports::BaseController
+module ImportViaCsv
+  class ObjectsController < ImportViaCsv::BaseController
     expose(:csv_imports) { csv_imports_class.most_recent.page(params[:page]) }
     expose(:csv_import) { CsvImport.find(params[:id]) }
 
