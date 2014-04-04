@@ -13,9 +13,14 @@
     # make sure you understand what will be generated
     rails g import_csv --help
 
-    # generate controllers and views namespaced under admin/csv_imports
-    # and javascripts namespaced under common
-    rails g import_csv admins common --pretend # remove pretend once happy with namespaces
+    # to generate
+    #   controllers and views namespaced under admin/csv_imports
+    #   javascripts namespaced under common
+    #   model and controller for Scheme import
+    rails g import_csv Scheme admins common --pretend # remove pretend once happy with namespaces
+
+    # generate second model
+    rails g import_csv Profile admins common --skip-skeleton --pretend # remove pretend once happy with namespaces
 
 * Ensure that you have localization helper defined:
   https://github.com/bitzesty/import_csv/blob/master/spec/dummy/app/helpers/application_helper.rb#L30
@@ -26,13 +31,19 @@
 
 * Define a strategy to build the imported object from csv attributes by updating generated
 
-    app/strategies/build_for_csv_import/company.rb
+    app/strategies/build_for_csv_import/<model>.rb
 
   https://github.com/bitzesty/import_csv/blob/master/spec/dummy/app/strategies/build_for_csv_import/company.rb
 
-* Launch the import updating
+* Update sample csv file in
 
-    app/controllers/csv_imports/companies_controller.rb
+    public/downloads/<models>_sample.csv
+
+  https://github.com/bitzesty/import_csv/blob/master/spec/dummy/public/downloads/companies_sample.csv
+
+* Allow to launch the import updating
+
+    app/controllers/csv_imports/<models>_controller.rb
 
   https://github.com/bitzesty/import_csv/blob/master/spec/dummy/app/controllers/csv_imports/companies_controller.rb
 
