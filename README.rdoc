@@ -6,6 +6,10 @@
 
 == Usage
 
+=== Include to your Gemfile
+
+    gem "import_csv", git: "git@github.com:bitzesty/import_csv"
+
 === To import objects via CSV:
 
 * Generate importer skeleton together with example
