@@ -8,12 +8,71 @@ class ImportCsvGenerator < Rails::Generators::Base
                default: true,
                desc: "Do not regenerate skeleton, only the model"
 
+  # skeleton - builds skeleton, should be run only once
   def generate_initializer
     for_skeleton do
       copy_file "../config/initializers/import_csv.rb",
                 "config/initializers/import_csv.rb"
     end
   end
+
+  def generate_assets
+    for_skeleton do
+      copy_file "assets/javascripts/common/csv_imports_table.js.coffee",
+                namespaced("app/assets/javascripts", javascript_namespace, "csv_imports_table.js.coffee")
+    end
+  end
+
+  def generate_helpers
+    for_skeleton do
+      generated_file_name = "app/helpers/csv_imports_helper.rb"
+
+      copy_file "helpers/csv_imports_helper.rb", generated_file_name
+      add_namespace_to_module generated_file_name, controller_namespace
+    end
+  end
+
+  def generate_skeleton_controllers
+    for_skeleton do
+      controllers = %w(base import_errors objects)
+
+      controllers.each do |controller|
+        controller_name = to_controller_name(controller)
+        generated_file_name = namespaced("app/controllers",
+                                         controller_namespace,
+                                         "import_via_csv",
+                                         controller_name)
+
+        copy_file "controllers/import_via_csv/#{controller_name}", generated_file_name
+        add_namespace_to_module generated_file_name, controller_namespace
+      end
+    end
+  end
+
+  def generate_skeleton_views
+    for_skeleton do
+      %w(import_errors objects).each do |view_dir|
+        destination_dir = namespaced("app/views", controller_namespace, "import_via_csv", view_dir)
+        directory "views/import_via_csv/#{view_dir}", destination_dir
+      end
+    end
+  end
+
+  def generate_decorators
+    for_skeleton do
+      directory "decorators", "app/decorators"
+    end
+  end
+
+  def add_namespace_to_path_helpers
+    for_skeleton do
+      add_namespace_to_controllers_paths
+      add_namespace_to_views_paths
+      add_namespace_to_decorator_paths
+    end
+  end
+
+  # concrete model
 
   def generate_strategy
     destination_file_name = "app/strategies/build_for_csv_import/#{model_file_name}.rb"
@@ -31,38 +90,7 @@ class ImportCsvGenerator < Rails::Generators::Base
     replace_model_name destination_file_name
   end
 
-  def generate_assets
-    for_skeleton do
-      copy_file "assets/javascripts/common/csv_imports_table.js.coffee",
-                namespaced("app/assets/javascripts", javascript_namespace, "csv_imports_table.js.coffee")
-    end
-  end
-
-  def generate_helpers
-    for_skeleton do
-      generated_file_name = namespaced("app/helpers", controller_namespace, "csv_imports_helper.rb")
-
-      copy_file "helpers/csv_imports_helper.rb", generated_file_name
-      add_namespace_to_module generated_file_name, controller_namespace
-    end
-  end
-
   def generate_controllers
-    for_skeleton do
-      controllers = %w(base import_errors objects)
-
-      controllers.each do |controller|
-        controller_name = to_controller_name(controller)
-        generated_file_name = namespaced("app/controllers",
-                                         controller_namespace,
-                                         "import_via_csv",
-                                         controller_name)
-
-        copy_file "controllers/import_via_csv/#{controller_name}", generated_file_name
-        add_namespace_to_module generated_file_name, controller_namespace
-      end
-    end
-
     # model controller
     destination_file_name = namespaced "app/controllers",
                                        controller_namespace,
@@ -73,18 +101,10 @@ class ImportCsvGenerator < Rails::Generators::Base
               destination_file_name
     add_namespace_to_module destination_file_name, controller_namespace
     replace_model_name destination_file_name
-
-    add_namespace_to_controllers_paths
+    add_namespace_to_paths destination_file_name
   end
 
   def generate_views
-    for_skeleton do
-      %w(import_errors objects).each do |view_dir|
-        destination_dir = namespaced("app/views", controller_namespace, "import_via_csv", view_dir)
-        directory "views/import_via_csv/#{view_dir}", destination_dir
-      end
-    end
-
     # model view
     view_dir = example_model_name.underscore.pluralize
     destination_dir = namespaced("app/views", controller_namespace, "import_via_csv", model_plural_file_name)
@@ -93,14 +113,7 @@ class ImportCsvGenerator < Rails::Generators::Base
     directory "views/import_via_csv/#{view_dir}", destination_dir
 
     replace_model_name destination_file_name
-
-    add_namespace_to_views_paths
-  end
-
-  def generate_decorators
-    for_skeleton do
-      directory "decorators", "app/decorators"
-    end
+    add_namespace_to_paths destination_file_name
   end
 
   def generate_csv_example_file
@@ -108,8 +121,9 @@ class ImportCsvGenerator < Rails::Generators::Base
               "public/downloads/#{model_plural_file_name}_sample.csv"
   end
 
-  def inform_user_about_routes
-    if options.skeleton?
+  # routes change information must be displayed last
+  def inform_user_about_skeleton_routes
+    for_skeleton do
       puts %Q{
 Please update your routes with the following
 
@@ -136,7 +150,12 @@ Please update your routes with the following
     end
   end
 }
-    else
+    end
+  end
+
+  # routes change information must be displayed last
+  def inform_user_about_routes
+    unless options.skeleton?
       puts %Q{
 Please update your routes with the following
 
@@ -164,8 +183,8 @@ Please update your routes with the following
   def add_namespace_to_module(file, namespace)
     if namespace.present?
       gsub_file file,
-                /\Amodule /,
-                "module #{namespace.camelize}::"
+                / ImportViaCsv/,
+                " #{namespace.camelize}::ImportViaCsv"
     end
   end
 
@@ -223,21 +242,26 @@ Please update your routes with the following
     yield if options.skeleton?
   end
 
-  def add_namespace_to_controllers_paths
+  def add_namespace_to_path_helpers_for(directory, file_extension)
     if controller_namespace
-      dir = namespaced "app/controllers", controller_namespace, "import_via_csv"
-      Dir[File.join(destination_root, dir, "**/*.rb")].each do |file|
+      Dir[File.join(destination_root, directory, "**/*.#{file_extension}")].each do |file|
         add_namespace_to_paths file
       end
     end
   end
 
+  def add_namespace_to_controllers_paths
+    dir = namespaced "app/controllers", controller_namespace, "import_via_csv"
+    add_namespace_to_path_helpers_for dir, "rb"
+  end
+
   def add_namespace_to_views_paths
-    if controller_namespace
-      dir = namespaced "app/views", controller_namespace, "import_via_csv"
-      Dir[File.join(destination_root, dir, "**/*.slim")].each do |file|
-        add_namespace_to_paths file
-      end
-    end
+    dir = namespaced "app/views", controller_namespace, "import_via_csv"
+    add_namespace_to_path_helpers_for dir, "slim"
+  end
+
+  def add_namespace_to_decorator_paths
+    dir = "app/decorators/import_via_csv"
+    add_namespace_to_path_helpers_for dir, "rb"
   end
 end

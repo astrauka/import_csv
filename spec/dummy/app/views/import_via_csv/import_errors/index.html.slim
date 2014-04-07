@@ -23,7 +23,7 @@
               th Name
               th Error Messages
           tbody
-            - import_errors.decorate.each do |import_error|
+            - ImportViaCsv::ImportErrorDecorator.decorate_collection(import_errors).each do |import_error|
               tr
                 td= import_error.name
                 td= import_error.error_message_for_display
