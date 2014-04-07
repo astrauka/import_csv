@@ -8,9 +8,9 @@ describe "Importing companies via csv" do
 
       expect_to_see "scheduled"
       expect_to_see "Completed"
-      expect_to_see "1failed"
+      expect_to_see "1 failed"
 
-      click_on "1failed"
+      click_on "1 failed"
       expect_to_see "Status was not found"
     end
   end
